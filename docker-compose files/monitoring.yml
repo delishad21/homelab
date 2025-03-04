@@ -1,0 +1,65 @@
+---
+volumes:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+services:
+  prometheus:
+    image: docker.io/prom/prometheus:v2.53.1
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    command: "--config.file=${PROMETHEUS_CONFIG_PATH}"
+    volumes:
+      - ${PROMETHEUS_CONFIG_PATH}:/etc/prometheus/prometheus.yaml:ro
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    environment:
+      - PROMETHEUS_CONFIG_PATH=/srv/prometheus/config/prometheus.yaml
+
+  grafana:
+    image: docker.io/grafana/grafana-oss:11.1.0
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:v1.8.2
+    container_name: node_exporter
+    command: "--path.rootfs=${NODE_EXPORTER_ROOTFS}"
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - ${NODE_EXPORTER_ROOTFS}:/host:ro,rslave
+    environment:
+      - NODE_EXPORTER_ROOTFS=/
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    container_name: cadvisor
+    ports:
+      - 8082:8080
+    volumes:
+      - ${CADVISOR_ROOTFS}:/rootfs:ro
+      - ${CADVISOR_RUN}:/run:ro
+      - ${CADVISOR_SYS}:/sys:ro
+      - ${CADVISOR_DOCKER}:/var/lib/docker:ro
+      - ${CADVISOR_DISK}:/dev/disk:ro
+    command:
+      - "-housekeeping_interval=30s"
+      - "-docker_only=true"
+    devices:
+      - /dev/kmsg
+    privileged: true
+    restart: unless-stopped
+    environment:
+      - CADVISOR_ROOTFS=/
+      - CADVISOR_RUN=/run
+      - CADVISOR_SYS=/sys
+      - CADVISOR_DOCKER=/var/lib/docker/
+      - CADVISOR_DISK=/dev/disk/

@@ -1,0 +1,24 @@
+services:
+  nextcloud-aio-mastercontainer:
+    image: nextcloud/all-in-one:latest
+    init: true
+    restart: always
+    container_name: nextcloud-aio-mastercontainer # This line is not allowed to be changed as otherwise AIO will not work correctly
+    volumes:
+      - nextcloud_aio_mastercontainer:/mnt/docker-aio-config # This line is not allowed to be changed as otherwise the built-in backup solution will not work
+      - ${DOCKER_SOCKET_PATH}:/var/run/docker.sock:ro # Path for Docker socket, may be modified for macOS, Windows, or rootless Docker
+    ports:
+      - 8080:8080
+    environment:
+      APACHE_PORT: ${APACHE_PORT} # e.g., 11000
+      APACHE_IP_BINDING: ${APACHE_IP_BINDING} # e.g., 0.0.0.0
+      NEXTCLOUD_DATADIR: ${NEXTCLOUD_DATADIR} # e.g., /mnt/RAID/nextcloud
+      NEXTCLOUD_MOUNT: ${NEXTCLOUD_MOUNT} # e.g., /mnt/winHDD2/
+      NEXTCLOUD_UPLOAD_LIMIT: ${NEXTCLOUD_UPLOAD_LIMIT} # e.g., 10G
+      NEXTCLOUD_MAX_TIME: ${NEXTCLOUD_MAX_TIME} # e.g., 3600
+      NEXTCLOUD_MEMORY_LIMIT: ${NEXTCLOUD_MEMORY_LIMIT} # e.g., 512M
+      # Add any other variables as needed
+
+volumes:
+  nextcloud_aio_mastercontainer:
+    name: nextcloud_aio_mastercontainer # This line is not allowed to be changed as otherwise the built-in backup solution will not work
