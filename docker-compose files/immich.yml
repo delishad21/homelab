@@ -1,11 +1,4 @@
-#
-# WARNING: Make sure to use the docker-compose.yml of the current release:
-#
-# https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
-#
-# The compose file on main may not be compatible with the latest release.
-#
-
+---
 name: immich
 
 services:
@@ -25,7 +18,7 @@ services:
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/RAID/nextcloud/delishad21/files/Photos:/mnt/nextcloud_photos
+      - ${NEXTCLOUD_PHOTOS_PATH}:/mnt/nextcloud_photos
     env_file:
       - stack.env
     ports:
@@ -37,8 +30,6 @@ services:
 
   immich-machine-learning:
     container_name: immich_machine_learning
-    # For hardware acceleration, add one of -[armnn, cuda, openvino] to the image tag.
-    # Example tag: ${IMMICH_VERSION:-release}-cuda
     image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}-cuda
     deploy:
       resources:
@@ -72,7 +63,10 @@ services:
     volumes:
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
     healthcheck:
-      test: pg_isready --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' || exit 1; Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
+      test:
+        pg_isready --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' || exit 1; \
+        Chksum="$$(psql --dbname='${DB_DATABASE_NAME}' --username='${DB_USERNAME}' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; \
+        echo "checksum failure count is $$Chksum"; [ "$$Chksum" = '0' ] || exit 1
       interval: 5m
       start_interval: 30s
       start_period: 5m
@@ -100,8 +94,8 @@ services:
     restart: unless-stopped
     environment:
       API_URL: http://immich_server:3001/api
-      API_KEY: JNNWoPStybCxrLEHqQCgZBZIwUV4LRZhOGJoNlzunYg
-      ROOT_PATH: /mnt/nextcloud_photos
+      API_KEY: ${IMMICH_API_KEY}
+      ROOT_PATH: ${NEXTCLOUD_PHOTOS_PATH}
       CRON_EXPRESSION: "0 * * * *"
       TZ: Asia/Singapore
 
