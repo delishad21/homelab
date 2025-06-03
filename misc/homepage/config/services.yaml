@@ -1,0 +1,127 @@
+- Todoist:
+    - "":
+        id: todoist
+        widget:
+          type: iframe
+          name: myIframe
+          src: ${HOMEPAGE_URL_TODOIST}
+          classes: h-120 sm:h-80 md:h-120 lg:h-120 xl:h-120 2xl:h-120
+
+- Immich Photos:
+    - "":
+        id: immich-photos
+        widget:
+          type: iframe
+          name: immich-Iframe
+          src: ${HOMEPAGE_URL_IMMICH_PHOTOS}
+          classes: h-120 sm:h-80 md:h-120 lg:h-120 xl:h-120 2xl:h-120
+
+- Management:
+    - Portainer:
+        href: ${HOMEPAGE_URL_PORTAINER}
+        icon: portainer.png
+        server: my-docker
+        container: portainer
+        statusStyle: dot
+    - Nginx Proxy Manager:
+        href: ${HOMEPAGE_URL_NPM}
+        icon: nginx-proxy-manager.png
+        server: my-docker
+        container: nginx-app-1
+        statusStyle: dot
+    - Jellyseerr:
+        href: ${HOMEPAGE_URL_JELLYSEERR}
+        icon: jellyseerr.png
+        server: my-docker
+        container: jellyseerr
+        statusStyle: dot
+    - qBittorrent:
+        href: ${HOMEPAGE_URL_QBITTORRENT}
+        icon: qbittorrent.png
+        server: my-docker
+        container: qbittorrent
+        statusStyle: dot
+    - Pi-hole:
+        href: ${HOMEPAGE_URL_PIHOLE}
+        icon: pi-hole.png
+        server: my-docker
+        container: pihole
+        statusStyle: dot
+
+- Media:
+    - Jellyfin:
+        href: ${HOMEPAGE_URL_JELLYFIN}
+        icon: jellyfin.png
+        server: my-docker
+        container: jellyfin
+        statusStyle: dot
+    - Jellyfin-Vue:
+        href: ${HOMEPAGE_URL_JELLYFIN_VUE}
+        icon: jellyfin-vue.png
+        server: my-docker
+        container: jellyfin-jellyfin-vue-1
+        statusStyle: dot
+    - Immich:
+        href: ${HOMEPAGE_URL_IMMICH}
+        icon: immich.png
+        server: my-docker
+        container: immich_server
+        statusStyle: dot
+    - Nextcloud:
+        href: ${HOMEPAGE_URL_NEXTCLOUD}
+        icon: nextcloud.png
+        server: my-docker
+        container: nextcloud-aio-nextcloud
+        statusStyle: dot
+    - PhotoPrism:
+        href: ${HOMEPAGE_URL_PHOTOPRISM}
+        icon: photoprism.png
+        server: my-docker
+        container: photoprism-photoprism-1
+        statusStyle: dot
+
+- Indexers:
+    - Prowlarr:
+        href: ${HOMEPAGE_URL_PROWLARR}
+        icon: prowlarr.png
+        server: my-docker
+        container: prowlarr
+        statusStyle: dot
+    - Sonarr:
+        href: ${HOMEPAGE_URL_SONARR}
+        icon: sonarr.png
+        server: my-docker
+        container: sonarr
+        statusStyle: dot
+    - Radarr:
+        href: ${HOMEPAGE_URL_RADARR}
+        icon: radarr.png
+        server: my-docker
+        container: radarr
+        statusStyle: dot
+    - Lidarr:
+        href: ${HOMEPAGE_URL_LIDARR}
+        icon: lidarr.png
+        server: my-docker
+        container: lidarr
+        statusStyle: dot
+    - Readarr:
+        href: ${HOMEPAGE_URL_READARR}
+        icon: readarr.png
+        server: my-docker
+        container: readarr
+        statusStyle: dot
+
+- Monitoring:
+    - Grafana:
+        href: ${HOMEPAGE_URL_GRAFANA}
+        icon: grafana.png
+        server: my-docker
+        container: grafana
+        statusStyle: dot
+    - Prometheus:
+        href: ${HOMEPAGE_URL_PROMETHEUS}
+        icon: prometheus.png
+        server: my-docker
+        container: prometheus
+        statusStyle: dot

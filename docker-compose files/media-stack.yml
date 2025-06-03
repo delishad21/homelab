@@ -1,0 +1,152 @@
+version: "3.8"
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=${VPN_COUNTRIES}
+    ports:
+      - 8888:8888/tcp
+      - 5055:5055
+      - 9696:9696
+      - 8989:8989
+      - 7878:7878
+      - 8686:8686
+      - 8787:8787
+      - 8081:8081
+      - 6881:6881
+      - 6881:6881/udp
+      - "${FLARESOLVERR_PORT:-8191}:8191"
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-debug}
+      - TZ=${TZ}
+      - PORT=5055
+    volumes:
+      - ${CONFIG_DIR}/jellyseerr:/app/config
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/prowlarr:/config
+      - ${BACKUP_DIR}/prowlarr:/data/Backup
+      - ${DOWNLOAD_DIR}:/downloads
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/sonarr:/config
+      - ${BACKUP_DIR}/sonarr:/data/Backup
+      - ${MEDIA_DIR}/tvshows:/data/tvshows
+      - ${DOWNLOAD_DIR}:/downloads
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/radarr:/config
+      - ${MEDIA_DIR}/movies:/data/movies
+      - ${DOWNLOAD_DIR}:/downloads
+      - ${BACKUP_DIR}/radarr:/data/Backup
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/lidarr:/config
+      - ${MEDIA_DIR}/music:/data/musicfolder
+      - ${DOWNLOAD_DIR}:/downloads
+      - ${BACKUP_DIR}/lidarr:/data/Backup
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:develop
+    container_name: readarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_DIR}/readarr:/config
+      - ${MEDIA_DIR}/books:/data/books
+      - ${DOWNLOAD_DIR}:/downloads
+      - ${BACKUP_DIR}/readarr:/data/Backup
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT:-8081}
+      - TORRENTING_PORT=${QBITTORRENT_TORRENT_PORT:-6881}
+    volumes:
+      - ${CONFIG_DIR}/qbittorrent:/config
+      - ${DOWNLOAD_DIR}:/downloads
+    restart: always
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=${TZ}
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun

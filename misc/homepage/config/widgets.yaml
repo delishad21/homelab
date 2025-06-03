@@ -1,0 +1,18 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+
+- greeting:
+    text_size: xl
+    text: Johan's Homepage
+- resources:
+    cpu: true
+    memory: true
+    disk:
+      - /
+      - /RAID
+
+- search:
+    provider: google
+    target: _blank
+    showSearchSuggestions: true

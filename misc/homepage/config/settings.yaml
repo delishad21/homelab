@@ -1,0 +1,64 @@
+---
+title: Johan's Homepage
+headerStyle: boxed
+
+background:
+  image: /images/meeting_by_hideyoshi_dedm26t.jpg
+  brightness: 50
+  opacity: 50
+
+cardBlur: 3xl
+
+theme: dark
+
+color: gray
+
+providers:
+  openweathermap: openweathermapapikey
+  weatherapi: weatherapiapikey
+
+useEqualHeights: true
+
+layout:
+  Todoist:
+    header: false
+    style: column
+  Immich Photos:
+    header: false
+    style: column
+  Bookmarks:
+    icon: mdi-bookmark-box-#FFFFFF
+    header: false
+    style: column
+  Bookmarks2:
+    icon: mdi-bookmark-box-#FFFFFF
+    header: false
+    style: column
+  Splitter:
+    header: false
+    style: row
+  Management:
+    icon: mdi-auto-fix-#FFFFFF
+    header: true
+    style: column
+    rows: 5
+  Media:
+    icon: mdi-multimedia-#FFFFFF
+    header: true
+    style: column
+    rows: 5
+  Indexers:
+    icon: mdi-server-#FFFFFF
+    header: true
+    style: column
+    rows: 5
+  Monitoring:
+    icon: mdi-chart-areaspline-#FFFFFF
+    header: true
+    style: column
+    rows: 5
+  Services:
+    icon: mdi-application-outline-#FFFFFF
+    header: true
+    style: row
+    columns: 5

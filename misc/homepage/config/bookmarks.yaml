@@ -1,0 +1,27 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+
+- Bookmarks:
+  - YouTube:
+    - icon: youtube.png
+      href: https://youtube.com/
+      description: ""
+  - Github:
+      - href: https://github.com/
+        icon: github-light.png
+        description: ""
+  - Reddit:
+      - icon: reddit.png
+        href: https://reddit.com/
+        description: ""
+- Bookmarks2:
+  - Gmail:
+    - icon: gmail.png
+      href: https://mail.google.com/
+      description: ""
+  - Drive:
+      - href: https://drive.google.com
+        icon: google-drive.png
+        description: ""
+

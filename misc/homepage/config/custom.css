@@ -1,0 +1,157 @@
+#headlessui-combobox-input-\:R3bcn6\: {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-style: none !important;
+    border-width: 0rem !important;
+}
+
+#headlessui-combobox-input-\:R3bcn6\::focus {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-style: none !important;
+    border-width: 0rem !important;
+}
+
+#headlessui-combobox-options-\:re\: {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+#headlessui-listbox-button-\:R1lbcn6\: {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-color: rgba(0, 0, 0, 0.4) !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+#layout-groups>div:nth-child(1) {
+    flex: 4 !important;
+    height: 33rem;
+    overflow: hidden;
+}
+
+#layout-groups>div:nth-child(2) {
+    flex: 2 !important;
+    height: 33rem;
+    overflow: hidden;
+}
+
+
+#layout-groups>div:nth-child(3) {
+    flex: 1 !important;
+}
+
+#layout-groups>div:nth-child(4) {
+    flex: 1 !important;
+}
+
+#splitter .service-card {
+    background-color: rgba(0, 0, 0, 0) !important;
+    height: 0rem;
+}
+
+#todoist iframe {
+    height: 32.2rem;
+    width: 103%;
+}
+
+#todoist .service-container {
+    height: 38rem;
+    top: -3rem;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transform: scale(1.0);
+}
+
+#immich-photos iframe {
+    height: 90rem;
+    width: 374%;
+    transform: scale(0.333) translate(0.22rem, 0px);
+    overflow: hidden;
+}
+
+#immich-photos .service-container {
+    /* Adjust based on how much you want to zoom */
+    height: 90rem;
+    top: -29rem;
+    overflow: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transform: scale(1.25);
+}
+
+#todoist .service-name,
+#immich-photos .service-name {
+    height: 0px !important;
+}
+
+
+#todoist .service-title,
+#immich-photos .service-title {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#todoist .service-title-text,
+#immich-photos .service-title-text {
+    height: 0px !important;
+}
+
+#todoist .service-tags,
+#immich-photos .service-tags {
+    height: 0px !important;
+}
+
+#information-widgets {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+#tabs ul {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.service-card {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+
+.bookmark-text {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.bookmark-icon {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.service {
+    padding: 3px;
+}
+
+.service-block {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.service-container {
+    padding: 10px;
+}
+
+.service-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.service-tags {
+    padding-top: 18px;
+}
+
+.service-name {
+    font-size: large !important;
+}
+
+.service-icon {
+    width: 50px !important;
+    height: 50px !important;
+}
